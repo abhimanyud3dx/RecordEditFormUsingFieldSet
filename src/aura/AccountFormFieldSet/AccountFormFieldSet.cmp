@@ -1,0 +1,25 @@
+<aura:component controller="AccountFormController" implements="flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+    
+    <aura:attribute name="accountFieldSet" type="List" access="private"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <lightning:recordEditForm aura:id="recordEditForm"
+                              recordId="{!v.recordId}"
+                              objectApiName="Account"
+                              density="comfy">
+        <lightning:messages />
+        <lightning:card>
+            <lightning:layout multipleRows="true">
+                <aura:iteration items="{!v.accountFieldSet}" var="field" >
+                    <lightning:layoutItem size="12" smallDeviceSize="12" mediumDeviceSize="6" largeDeviceSize="6" padding="horizontal-small">
+                        <lightning:inputField aura:id="field" class="{!field.fieldName}" required="{!field.isRequired}" fieldName="{!field.fieldName}"/>
+                    </lightning:layoutItem>
+                </aura:iteration>
+            </lightning:layout>
+            <div class="slds-m-top_medium slds-align_absolute-center">
+                <lightning:button variant="brand" type="submit" name="save" label="Save" />
+            </div>
+        </lightning:card>
+    </lightning:recordEditForm>
+</aura:component>
